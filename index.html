@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mye Farm - Farm Fresh, Delivered to Your Door</title>
+  <meta name="description" content="Mye Farm connects rural farmers directly to customers. Order fresh rice, lentils, oils and more. Pan India delivery in 7-12 working days." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --green: #2E7D32;
+      --green-dark: #0F3D24;
+      --green-deep: #082D1A;
+      --green-light: #4CAF50;
+      --green-pale: #E8F5E9;
+      --amber: #C9952C;
+      --amber-soft: #F5E7C9;
+      --earth: #6D4C41;
+      --cream: #FAFAF7;
+      --soft-cream: #FFF8EA;
+      --warm-white: #FFFFFF;
+      --text-dark: #1A1A1A;
+      --text-mid: #4A4A4A;
+      --text-light: #757575;
+      --border: #E0E0D8;
+      --wa-green: #25D366;
+      --shadow: 0 18px 45px rgba(20, 38, 28, 0.12);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--text-dark); line-height: 1.6; }
+    img { max-width: 100%; display: block; }
+
+    nav { position: sticky; top: 0; z-index: 100; height: 72px; padding: 0 1.5rem; display: flex; align-items: center; justify-content: space-between; background: rgba(255,255,255,0.96); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); transition: box-shadow 0.25s ease; }
+    nav.scrolled { box-shadow: 0 8px 28px rgba(0,0,0,0.08); }
+    .nav-logo, .footer-logo { display: inline-flex; align-items: center; color: var(--green-dark); text-decoration: none; font-family: 'Playfair Display', serif; font-size: 1.38rem; font-weight: 700; white-space: nowrap; }
+    .nav-links { display: flex; gap: 1.7rem; list-style: none; align-items: center; }
+    .nav-link { text-decoration: none; color: var(--text-mid); font-size: 0.9rem; font-weight: 600; transition: color 0.2s; }
+    .nav-link:hover, .nav-link.active { color: var(--green); }
+    .nav-cta, .btn-primary, .btn-outline, .btn-wa-big, .btn-order, .contact-submit { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; text-decoration: none; font-weight: 700; font-family: 'Inter', sans-serif; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease; }
+    .nav-cta { background: var(--wa-green); color: #fff; padding: 0.58rem 1.15rem; border-radius: 999px; font-size: 0.875rem; box-shadow: 0 8px 22px rgba(37,211,102,0.24); }
+    .nav-cta:hover, .btn-primary:hover, .btn-wa-big:hover, .contact-submit:hover { transform: translateY(-2px); }
+    .hamburger { display: none; width: 42px; height: 42px; border: 1px solid var(--border); border-radius: 8px; background: var(--warm-white); cursor: pointer; align-items: center; justify-content: center; flex-direction: column; gap: 5px; }
+    .hamburger span { width: 20px; height: 2px; background: var(--green-dark); border-radius: 2px; transition: transform 0.25s ease, opacity 0.25s ease; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .hero { min-height: calc(100vh - 72px); color: #fff; padding: 7rem 1.5rem 5rem; text-align: center; position: relative; overflow: hidden; background: linear-gradient(rgba(5,30,18,0.68), rgba(5,30,18,0.72)), url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1800&q=80') center/cover no-repeat; display: flex; align-items: center; }
+    .hero::after { content: ''; position: absolute; inset: auto 0 0; height: 160px; background: linear-gradient(transparent, rgba(0,0,0,0.24)); pointer-events: none; }
+    .hero .container { position: relative; z-index: 1; }
+    .hero-badge, .section-eyebrow { color: var(--amber); font-size: 0.78rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; }
+    .hero-badge { display: inline-flex; background: rgba(201,149,44,0.16); border: 1px solid rgba(201,149,44,0.42); padding: 0.45rem 1rem; border-radius: 999px; margin-bottom: 1.5rem; }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 700; line-height: 1.08; margin-bottom: 1.35rem; }
+    .hero h1 span { display: block; color: #fff; }
+    .hero h1 em { display: block; color: var(--amber); font-style: normal; }
+    .hero p { font-size: 1.12rem; color: rgba(255,255,255,0.88); max-width: 680px; margin: 0 auto 2.2rem; line-height: 1.75; }
+    .hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-primary { background: var(--green); color: #fff; padding: 0.9rem 1.8rem; border-radius: 999px; box-shadow: 0 12px 28px rgba(46,125,50,0.36); }
+    .btn-outline { border: 2px solid rgba(255,255,255,0.72); color: #fff; padding: 0.82rem 1.8rem; border-radius: 999px; }
+    .btn-outline:hover { background: #fff; color: var(--green-dark); }
+    .hero-stats { display: flex; justify-content: center; gap: clamp(1.4rem, 5vw, 4rem); margin-top: 3.5rem; padding-top: 2.5rem; border-top: 1px solid rgba(255,255,255,0.22); flex-wrap: wrap; }
+    .stat-item { text-align: center; min-width: 120px; }
+    .stat-number { display: block; font-family: 'Playfair Display', serif; font-size: 2.15rem; font-weight: 700; color: var(--amber); }
+    .stat-label { font-size: 0.78rem; color: rgba(255,255,255,0.75); text-transform: uppercase; letter-spacing: 0.08em; }
+
+    section { padding: 5.25rem 1.5rem; }
+    .container { max-width: 1120px; margin: 0 auto; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.85rem, 4vw, 2.75rem); font-weight: 700; color: var(--text-dark); line-height: 1.2; margin: 0.6rem 0 1rem; }
+    .section-sub { color: var(--text-mid); font-size: 1.03rem; max-width: 620px; line-height: 1.75; }
+    .section-header { margin-bottom: 3rem; }
+
+    #products { background: var(--warm-white); }
+    .category-tabs, .filter-tabs { display: flex; gap: 0.65rem; margin-bottom: 2.5rem; flex-wrap: wrap; }
+    .tab-btn, .filter-btn { padding: 0.62rem 1.25rem; border: 1.5px solid var(--border); border-radius: 999px; background: transparent; color: var(--text-mid); font-size: 0.9rem; font-weight: 700; cursor: pointer; transition: all 0.2s; font-family: 'Inter', sans-serif; }
+    .tab-btn.active, .tab-btn:hover, .filter-btn.active, .filter-btn:hover { background: var(--green); border-color: var(--green); color: #fff; }
+    .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 1.75rem; }
+    .product-card { background: var(--cream); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; transition: transform 0.25s, box-shadow 0.25s; }
+    .product-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+    .product-card.hidden { display: none; }
+    .product-img-wrap { background: #F5F0E8; padding: 1.5rem; display: flex; align-items: center; justify-content: center; height: 220px; }
+    .product-img-wrap img { max-height: 190px; max-width: 100%; object-fit: contain; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.12)); transition: transform 0.25s ease; }
+    .product-body { padding: 1.25rem; }
+    .product-category { font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--amber); margin-bottom: 0.35rem; }
+    .product-name { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--text-dark); margin-bottom: 0.25rem; }
+    .product-subtitle { font-size: 0.825rem; color: var(--text-light); margin-bottom: 0.75rem; font-style: italic; }
+    .product-desc { font-size: 0.85rem; color: var(--text-mid); line-height: 1.6; margin-bottom: 1rem; }
+    .product-prices { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.1rem; }
+    .price-tag { background: var(--green-pale); color: var(--green); font-size: 0.8rem; font-weight: 700; padding: 0.3rem 0.65rem; border-radius: 6px; }
+    .btn-order { width: 100%; background: var(--wa-green); color: #fff; border: none; border-radius: 8px; padding: 0.72rem 1rem; font-size: 0.875rem; }
+
+    #why { background: var(--cream); }
+    .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+    .why-card, .pillar, .contact-card, .testimonial-card, .delivery-card { border-radius: 8px; }
+    .why-card { background: var(--warm-white); border: 1px solid var(--border); padding: 1.5rem; box-shadow: 0 10px 28px rgba(0,0,0,0.04); }
+    .why-icon, .pillar-icon, .contact-icon { width: 44px; height: 44px; background: var(--amber-soft); color: var(--amber); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; margin-bottom: 1rem; }
+    .why-card h3, .pillar h3, .delivery-card h3 { font-size: 1rem; color: var(--text-dark); margin-bottom: 0.45rem; }
+    .why-card p, .pillar p { color: var(--text-mid); font-size: 0.9rem; line-height: 1.65; }
+
+    #how { background: var(--green-deep); color: #fff; overflow: hidden; }
+    #how .section-title { color: #fff; }
+    #how .section-sub { color: rgba(255,255,255,0.75); }
+    .timeline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; position: relative; margin-top: 3.2rem; }
+    .timeline::before { content: ''; position: absolute; top: 38px; left: 12%; right: 12%; height: 2px; background: rgba(201,149,44,0.5); }
+    .step-item { position: relative; text-align: center; padding: 0 0.8rem; }
+    .step-number { width: 76px; height: 76px; margin: 0 auto 1.2rem; border-radius: 50%; background: var(--green-dark); border: 2px solid var(--amber); color: var(--amber); display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 1.7rem; font-weight: 700; position: relative; z-index: 1; }
+    .step-item h3 { margin-bottom: 0.45rem; font-size: 1rem; }
+    .step-item p { color: rgba(255,255,255,0.72); font-size: 0.9rem; line-height: 1.65; }
+
+    #about { background: var(--warm-white); }
+    .about-grid { display: grid; grid-template-columns: 0.95fr 1.05fr; gap: 3rem; align-items: center; }
+    .about-visual { border-radius: 8px; overflow: hidden; min-height: 520px; background: url('https://images.unsplash.com/photo-1523741543316-beb7fc7023d8?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat; box-shadow: var(--shadow); }
+    .about-content .section-sub { max-width: none; }
+    .pillar-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin: 1.8rem 0; }
+    .pillar { background: var(--cream); border: 1px solid var(--border); padding: 1.15rem; }
+    .pillar-icon { margin-bottom: 0.75rem; }
+    .btn-wa-big { background: var(--wa-green); color: #fff; padding: 0.95rem 1.6rem; border-radius: 999px; box-shadow: 0 10px 24px rgba(37,211,102,0.28); }
+
+    #delivery { background: linear-gradient(135deg, var(--green-dark), var(--green)); color: #fff; position: relative; overflow: hidden; }
+    #delivery::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 20% 10%, rgba(201,149,44,0.18), transparent 34%); pointer-events: none; }
+    #delivery .container { position: relative; }
+    #delivery .section-title { color: #fff; }
+    #delivery .section-sub { color: rgba(255,255,255,0.78); }
+    .delivery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1.25rem; margin-top: 3rem; }
+    .delivery-card { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.22); padding: 1.75rem 1.45rem; backdrop-filter: blur(6px); }
+    .delivery-icon { width: 52px; height: 52px; background: rgba(201,149,44,0.18); border: 1px solid rgba(201,149,44,0.38); color: var(--amber); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 1rem; }
+    .delivery-card h3 { color: #fff; }
+    .delivery-card p { font-size: 0.9rem; color: rgba(255,255,255,0.75); line-height: 1.65; }
+
+    #testimonials { background: var(--soft-cream); }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+    .testimonial-card { background: var(--warm-white); border: 1px solid rgba(201,149,44,0.22); padding: 1.75rem; box-shadow: 0 12px 30px rgba(90, 62, 24, 0.08); }
+    .stars { color: var(--amber); font-size: 1rem; margin-bottom: 1rem; letter-spacing: 2px; }
+    .testimonial-text { font-size: 0.95rem; color: var(--text-mid); line-height: 1.7; margin-bottom: 1.25rem; font-style: italic; }
+    .testimonial-author { display: flex; align-items: center; gap: 0.75rem; }
+    .author-avatar { width: 42px; height: 42px; border-radius: 50%; background: var(--green-pale); display: flex; align-items: center; justify-content: center; font-weight: 800; color: var(--green); font-size: 0.9rem; flex-shrink: 0; }
+    .author-name { font-weight: 700; font-size: 0.9rem; color: var(--text-dark); }
+    .author-location { font-size: 0.8rem; color: var(--text-light); }
+
+    #contact { background: var(--cream); }
+    .contact-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 3rem; align-items: start; }
+    .contact-info { display: grid; gap: 1rem; margin-top: 1.5rem; }
+    .contact-item { background: var(--warm-white); border: 1px solid var(--border); border-radius: 8px; padding: 1.1rem; display: flex; gap: 1rem; align-items: flex-start; }
+    .contact-icon { flex-shrink: 0; margin: 0; }
+    .contact-item strong { display: block; font-size: 0.85rem; font-weight: 800; color: var(--text-dark); }
+    .contact-item span, .contact-item a { font-size: 0.9rem; color: var(--text-mid); text-decoration: none; }
+    .contact-card { background: var(--warm-white); border: 1px solid var(--border); padding: 2rem; box-shadow: var(--shadow); }
+    .contact-card h3 { font-family: 'Playfair Display', serif; font-size: 1.65rem; margin-bottom: 0.45rem; }
+    .contact-card p { color: var(--text-mid); margin-bottom: 1.4rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-field { display: flex; flex-direction: column; gap: 0.45rem; margin-bottom: 1rem; }
+    .form-field label { font-size: 0.82rem; font-weight: 800; color: var(--text-dark); }
+    .form-field input, .form-field textarea { width: 100%; border: 1px solid var(--border); border-radius: 8px; padding: 0.85rem 0.95rem; font: inherit; color: var(--text-dark); background: var(--cream); outline: none; transition: border-color 0.2s, box-shadow 0.2s; }
+    .form-field textarea { min-height: 150px; resize: vertical; }
+    .form-field input:focus, .form-field textarea:focus { border-color: var(--amber); box-shadow: 0 0 0 4px rgba(201,149,44,0.14); }
+    .contact-submit { width: 100%; border: 0; border-radius: 999px; padding: 0.95rem 1.2rem; background: var(--wa-green); color: #fff; font-size: 1rem; }
+
+    footer { background: var(--green-deep); color: rgba(255,255,255,0.72); padding: 3.5rem 1.5rem 1.6rem; text-align: left; }
+    footer .footer-logo { color: #fff; margin-bottom: 0.8rem; }
+    .footer-grid { display: grid; grid-template-columns: 1.25fr 0.75fr 1fr; gap: 2rem; margin-bottom: 2rem; }
+    .footer-tagline { max-width: 330px; font-size: 0.92rem; line-height: 1.7; }
+    .footer-heading { color: var(--amber); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.14em; font-weight: 800; margin-bottom: 0.9rem; }
+    .footer-links, .footer-contact { list-style: none; display: grid; gap: 0.55rem; }
+    footer a { color: rgba(255,255,255,0.78); text-decoration: none; }
+    footer a:hover { color: #fff; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.12); padding-top: 1rem; display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; font-size: 0.82rem; }
+
+    .wa-float { position: fixed; bottom: 1.5rem; right: 1.5rem; width: 58px; height: 58px; background: var(--wa-green); border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 4px 20px rgba(37,211,102,0.45); z-index: 200; transition: transform 0.2s; }
+    .wa-float:hover { transform: scale(1.08); }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    @keyframes contactShake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+    .contact-card.shake { animation: contactShake 0.24s ease; }
+
+    @media (max-width: 900px) {
+      .nav-links { position: fixed; top: 72px; left: 0; right: 0; background: rgba(255,255,255,0.98); border-bottom: 1px solid var(--border); box-shadow: 0 18px 32px rgba(0,0,0,0.08); display: grid; gap: 0; padding: 0.7rem 1.5rem 1.2rem; transform: translateY(-130%); opacity: 0; pointer-events: none; transition: transform 0.25s ease, opacity 0.25s ease; }
+      .nav-links.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+      .nav-link { display: block; padding: 0.8rem 0; }
+      .hamburger { display: flex; }
+      .nav-cta { display: none; }
+      .why-grid, .timeline, .about-grid, .contact-grid, .footer-grid { grid-template-columns: 1fr; }
+      .timeline::before { display: none; }
+      .step-item { text-align: left; display: grid; grid-template-columns: 76px 1fr; gap: 1rem; align-items: start; }
+      .step-number { margin: 0; }
+      .about-visual { min-height: 360px; }
+    }
+
+    @media (max-width: 640px) {
+      nav { padding: 0 1rem; }
+      .hero { min-height: auto; padding: 5rem 1.1rem 4rem; }
+      .hero-buttons, .category-tabs, .filter-tabs { flex-direction: column; align-items: stretch; }
+      .hero-buttons a, .filter-btn { width: 100%; }
+      .hero-stats { gap: 1.2rem; }
+      .stat-item { min-width: 42%; }
+      section { padding: 3.75rem 1rem; }
+      .products-grid { grid-template-columns: 1fr; }
+      .pillar-grid, .form-row { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; }
+      .wa-float { width: 52px; height: 52px; right: 1rem; bottom: 1rem; }
+    }
+
+  
+.nav-logo img{height:50px;width:auto;display:block;}
+.footer-logo img{height:60px;width:auto;display:block;}
+@media (max-width:768px){.nav-logo img{height:40px;}}
+
+</style>
+  <link rel="icon" type="image/png" href="images/myefarm-logo.png" />
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo" aria-label="Mye Farm home"><img src="images/myefarm-logo.png" alt="Mye Farm Logo"></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a class="nav-link" href="#products">Products</a></li>
+    <li><a class="nav-link" href="#why">Why Mye Farm</a></li>
+    <li><a class="nav-link" href="#about">About Us</a></li>
+    <li><a class="nav-link" href="#delivery">Delivery</a></li>
+    <li><a class="nav-link" href="#contact">Contact</a></li>
+  </ul>
+  <a href="https://wa.me/917077769100?text=Hi%2C%20I%20want%20to%20order%20from%20Mye%20Farm" target="_blank" class="nav-cta"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg> Order on WhatsApp</a>
+  <button class="hamburger" id="hamburger" type="button" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-badge">Straight from the Farm</div>
+    <h1><span>Fresh Farm Produce,</span><em>Delivered Across India</em></h1>
+    <p>Mye Farm connects rural farmers directly to your kitchen — no middlemen, no compromise on quality. Indigenous rice, lentils, oils and more.</p>
+    <div class="hero-buttons">
+      <a href="#products" class="btn-outline">Explore Products</a>
+      <a href="https://wa.me/917077769100?text=Hi%2C%20I%20want%20to%20order%20from%20Mye%20Farm" target="_blank" class="btn-primary"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg> Order on WhatsApp</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item"><span class="stat-number">100%</span><span class="stat-label">Farm Sourced</span></div>
+      <div class="stat-item"><span class="stat-number">7-12</span><span class="stat-label">Working Days</span></div>
+      <div class="stat-item"><span class="stat-number">Pan India</span><span class="stat-label">Delivery</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="products">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-eyebrow">What We Grow</p>
+      <h2 class="section-title">Our Products</h2>
+      <p class="section-sub">Indigenous varieties sourced directly from farmers. No blending, no adulterants — just the real thing.</p>
+    </div>
+    
+
+    <div class="products-grid">
+
+      <!-- Pimpudibasa -->
+      <div class="product-card">
+        <div class="product-img-wrap">
+          <img src="images/Pimpudibasa_Front.png" alt="Pimpudibasa Rice" />
+        </div>
+        <div class="product-body">
+          <p class="product-category">Farm Rice</p>
+          <h3 class="product-name">Pimpudibasa</h3>
+          <p class="product-subtitle">Indigenous & Super Aromatic</p>
+          <p class="product-desc">A traditionally aromatic indigenous rice variety with a unique natural fragrance, soft texture, and rich taste — cultivated using traditional farming practices.</p>
+          <div class="product-prices">
+            <span class="price-tag">₹100 / 400g</span>
+            <span class="price-tag">₹200 / 900g</span>
+            <span class="price-tag">₹400 / 1.9kg</span>
+          </div>
+          <a href="https://wa.me/917077769100?text=Hi%2C%20I%20want%20to%20order%20Pimpudibasa%20Rice%20from%20Mye%20Farm" target="_blank" class="btn-order">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            Order on WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <!-- Sonamasoori -->
+      <div class="product-card">
+        <div class="product-img-wrap">
+          <img src="images/Sonamasoori_Front.png" alt="Sonamasoori Rice" />
+        </div>
+        <div class="product-body">
+          <p class="product-category">Farm Rice</p>
+          <h3 class="product-name">Sonamasoori</h3>
+          <p class="product-subtitle">Mined Rice — Light & Easy to Digest</p>
+          <p class="product-desc">A premium lightweight rice variety known for its soft texture, mild aroma, and delicious taste. Less starch, gentle on digestion — ideal for daily meals.</p>
+          <div class="product-prices">
+            <span class="price-tag">₹60 / 400g</span>
+            <span class="price-tag">₹120 / 900g</span>
+            <span class="price-tag">₹240 / 1.9kg</span>
+          </div>
+          <a href="https://wa.me/917077769100?text=Hi%2C%20I%20want%20to%20order%20Sonamasoori%20Rice%20from%20Mye%20Farm" target="_blank" class="btn-order">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            Order on WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <!-- Deshi Mugei -->
+      <div class="product-card">
+        <div class="product-img-wrap">
+          <img src="images/Deshi_Mugei_Rice.png" alt="Deshi Mugei Rice" />
+        </div>
+        <div class="product-body">
+          <p class="product-category">Farm Rice</p>
+          <h3 class="product-name">Deshi Mugei Rice</h3>
+          <p class="product-subtitle">Parboiled Rice — Naturally Gluten Free</p>
+          <p class="product-desc">A traditional indigenous rice variety valued for its natural taste, soft texture, and nutritional richness. Versatile in cooking, gentle on the stomach.</p>
+          <div class="product-prices">
+            <span class="price-tag">₹60 / 400g</span>
+            <span class="price-tag">₹120 / 900g</span>
+            <span class="price-tag">₹240 / 1.9kg</span>
+          </div>
+          <a href="https://wa.me/917077769100?text=Hi%2C%20I%20want%20to%20order%20Deshi%20Mugei%20Rice%20from%20Mye%20Farm" target="_blank" class="btn-order">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            Order on WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <!-- Lusuri Red Rice -->
+      <div class="product-card">
+        <div class="product-img-wrap">
+          <img src="images/Lusuri_Front.png" alt="Lusuri Red Rice" />
+        </div>
+        <div class="product-body">
+          <p class="product-category">Farm Rice</p>
+          <h3 class="product-name">Lusuri / Red Rice</h3>
+          <p class="product-subtitle">Hand Pounded</p>
+          <p class="product-desc">Traditional hand-pounded red rice — minimally processed to retain its natural bran layer, nutrients, and earthy flavour. A heritage grain from Odisha.</p>
+          <div class="product-prices">
+            <span class="price-tag">Contact for price</span>
+          </div>
+          <a href="https://wa.me/917077769100?text=Hi%2C%20I%20want%20to%20order%20Lusuri%20Red%20Rice%20from%20Mye%20Farm" target="_blank" class="btn-order">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            Order on WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <!-- Kalamalliphulla -->
+      <div class="product-card">
+        <div class="product-img-wrap">
+          <img src="images/Kalamaliphulla_Front.png" alt="Kalamalliphulla Black Rice" />
+        </div>
+        <div class="product-body">
+          <p class="product-category">Farm Rice</p>
+          <h3 class="product-name">Kalamalliphulla</h3>
+          <p class="product-subtitle">Black Rice</p>
+          <p class="product-desc">Rare indigenous black rice packed with antioxidants. Naturally pigmented, nutty in flavour, and traditionally used for its nutritional richness.</p>
+          <div class="product-prices">
+            <span class="price-tag">Contact for price</span>
+          </div>
+          <a href="https://wa.me/917077769100?text=Hi%2C%20I%20want%20to%20order%20Kalamalliphulla%20Black%20Rice%20from%20Mye%20Farm" target="_blank" class="btn-order">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            Order on WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <!-- Salafula -->
+      <div class="product-card">
+        <div class="product-img-wrap">
+          <img src="images/Salafula_.png" alt="Salafula Parboiled Rice" />
+        </div>
+        <div class="product-body">
+          <p class="product-category">Farm Rice</p>
+          <h3 class="product-name">Salafula</h3>
+          <p class="product-subtitle">Parboiled Rice</p>
+          <p class="product-desc">Traditional parboiled rice that retains nutrients through the parboiling process. Long grain, firm texture, and a mild flavour suited to everyday cooking.</p>
+          <div class="product-prices">
+            <span class="price-tag">Contact for price</span>
+          </div>
+          <a href="https://wa.me/917077769100?text=Hi%2C%20I%20want%20to%20order%20Salafula%20Rice%20from%20Mye%20Farm" target="_blank" class="btn-order">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            Order on WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <!-- Khichdi Mix -->
+      <div class="product-card">
+        <div class="product-img-wrap">
+          <img src="images/Khidi_Mix_Front.png" alt="Khichdi Mix" />
+        </div>
+        <div class="product-body">
+          <p class="product-category">Farm Rice</p>
+          <h3 class="product-name">Khichdi Mix</h3>
+          <p class="product-subtitle">Black Rice · Red Rice · Mined Rice · Aromatic Rice · Roasted Moong Dal</p>
+          <p class="product-desc">A thoughtfully blended multi-grain Khichdi mix combining five farm varieties for a nutritious, wholesome, and flavourful one-pot meal.</p>
+          <div class="product-prices">
+            <span class="price-tag">Contact for price</span>
+          </div>
+          <a href="https://wa.me/917077769100?text=Hi%2C%20I%20want%20to%20order%20Khichdi%20Mix%20from%20Mye%20Farm" target="_blank" class="btn-order">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            Order on WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <!-- Whole Moong -->
+      <div class="product-card">
+        <div class="product-img-wrap">
+          <img src="images/Whole_Moong_Front.png" alt="Whole Moong" />
+        </div>
+        <div class="product-body">
+          <p class="product-category">Farm Lentil</p>
+          <h3 class="product-name">Whole Moong</h3>
+          <p class="product-subtitle">Green Moong — High Protein</p>
+          <p class="product-desc">Nutrient-rich whole moong with its natural green outer layer intact for maximum nutrition. High protein, dietary fibre, and ideal for soups, sprouts, and dal.</p>
+          <div class="product-prices">
+            <span class="price-tag">₹90 / 400g</span>
+            <span class="price-tag">₹180 / 900g</span>
+            <span class="price-tag">₹360 / 1.9kg</span>
+          </div>
+          <a href="https://wa.me/917077769100?text=Hi%2C%20I%20want%20to%20order%20Whole%20Moong%20from%20Mye%20Farm" target="_blank" class="btn-order">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            Order on WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <!-- Roasted Horse Gram -->
+      <div class="product-card">
+        <div class="product-img-wrap">
+          <img src="images/Roasted_Horse_Gram_Dal.png" alt="Roasted Horse Gram Dal" />
+        </div>
+        <div class="product-body">
+          <p class="product-category">Farm Lentil</p>
+          <h3 class="product-name">Roasted Horse Gram Dal</h3>
+          <p class="product-subtitle">Desi Roasted · Aromatic</p>
+          <p class="product-desc">A traditional protein-rich pulse with a nutty flavour — desi roasted for a natural aroma. Rich in protein, dietary fibre, and essential minerals. A true superfood.</p>
+          <div class="product-prices">
+            <span class="price-tag">₹100 / 400g</span>
+            <span class="price-tag">₹200 / 900g</span>
+            <span class="price-tag">₹400 / 1.9kg</span>
+          </div>
+          <a href="https://wa.me/917077769100?text=Hi%2C%20I%20want%20to%20order%20Roasted%20Horse%20Gram%20Dal%20from%20Mye%20Farm" target="_blank" class="btn-order">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            Order on WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <!-- Roasted Moong Dal -->
+      <div class="product-card">
+        <div class="product-img-wrap">
+          <img src="images/Roasted_Moong_Dal_Front.png" alt="Roasted Moong Dal" />
+        </div>
+        <div class="product-body">
+          <p class="product-category">Farm Lentil</p>
+          <h3 class="product-name">Roasted Moong Dal</h3>
+          <p class="product-subtitle">Desi Roasted · Aromatic</p>
+          <p class="product-desc">Split moong dal slow-roasted the traditional way for a warm, earthy aroma. Easy to digest, quick to cook, and packed with plant protein and fibre.</p>
+          <div class="product-prices">
+            <span class="price-tag">Contact for price</span>
+          </div>
+          <a href="https://wa.me/917077769100?text=Hi%2C%20I%20want%20to%20order%20Roasted%20Moong%20Dal%20from%20Mye%20Farm" target="_blank" class="btn-order">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            Order on WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <!-- Mustard Oil -->
+      <div class="product-card">
+        <div class="product-img-wrap">
+          <img src="images/Mustard_Oil.png" alt="Kachi Ghani Mustard Oil" />
+        </div>
+        <div class="product-body">
+          <p class="product-category">Farm Oil</p>
+          <h3 class="product-name">Kachi Ghani Mustard Oil</h3>
+          <p class="product-subtitle">100% Pure · Cold Pressed</p>
+          <p class="product-desc">Pure cold-pressed mustard oil extracted from carefully selected mustard seeds using traditional Kachi Ghani method. No refining. No chemicals. Real pungency.</p>
+          <div class="product-prices">
+            <span class="price-tag">Contact for price</span>
+          </div>
+          <a href="https://wa.me/917077769100?text=Hi%2C%20I%20want%20to%20order%20Kachi%20Ghani%20Mustard%20Oil%20from%20Mye%20Farm" target="_blank" class="btn-order">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            Order on WhatsApp
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHY MYE FARM -->
+<section id="why">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-eyebrow">Why Mye Farm</p>
+      <h2 class="section-title">A cleaner route from rural farms to your kitchen</h2>
+      <p class="section-sub">We combine farmer-first sourcing, community partnerships, and careful checks so every order carries trust from field to doorstep.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card"><div class="why-icon">🌾</div><h3>Direct From Farmers</h3><p>Produce is sourced from farming communities so growers stay closer to the value they create.</p></div>
+      <div class="why-card"><div class="why-icon">✂</div><h3>No Middlemen</h3><p>A simple digital ordering model keeps the chain transparent and unnecessary layers out.</p></div>
+      <div class="why-card"><div class="why-icon">🤝</div><h3>NGO & SHG Partnerships</h3><p>We collaborate with NGOs and Self-Help Groups to support rural producers at the source.</p></div>
+      <div class="why-card"><div class="why-icon">✓</div><h3>Quality Assured</h3><p>Products are checked before dispatch for freshness, authenticity, and clean packaging.</p></div>
+      <div class="why-card"><div class="why-icon">🌱</div><h3>Indigenous Varieties</h3><p>Discover regional rice, lentils, and oils with taste profiles rooted in local food traditions.</p></div>
+      <div class="why-card"><div class="why-icon">📦</div><h3>Pan India Delivery</h3><p>Orders are packed securely and shipped across India with WhatsApp-based coordination.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-eyebrow">How It Works</p>
+      <h2 class="section-title">From natural cultivation to fresh delivery</h2>
+      <p class="section-sub">A simple four-step flow keeps ordering easy while preserving product quality.</p>
+    </div>
+    <div class="timeline">
+      <div class="step-item"><div class="step-number">1</div><div><h3>Cultivated Naturally</h3><p>Farmers grow regional produce using traditional knowledge and careful cultivation.</p></div></div>
+      <div class="step-item"><div class="step-number">2</div><div><h3>Quality Checked</h3><p>Each batch is reviewed and packed to keep it fresh, clean, and ready for shipping.</p></div></div>
+      <div class="step-item"><div class="step-number">3</div><div><h3>Order on WhatsApp</h3><p>You choose products and share delivery details through a simple WhatsApp message.</p></div></div>
+      <div class="step-item"><div class="step-number">4</div><div><h3>Delivered Fresh</h3><p>Your order reaches your doorstep across India in the standard delivery window.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-visual" role="img" aria-label="Farm field with farmers at work"></div>
+      <div class="about-content">
+        <p class="section-eyebrow">Who We Are</p>
+        <h2 class="section-title">About Mye Farm</h2>
+        <p class="section-sub">Mye Farm is an agri-tech enabled company based in Bhubaneswar, Odisha. We work closely with rural farmers, NGOs, and Self-Help Groups to bridge the gap between farm produce and end customers through online channels.</p>
+        <div class="pillar-grid">
+          <div class="pillar"><div class="pillar-icon">🌾</div><h3>Farmer-Owned</h3><p>Built around rural producers and fairer access to digital markets.</p></div>
+          <div class="pillar"><div class="pillar-icon">🔎</div><h3>Traceable</h3><p>Clear sourcing, transparent communication, and direct order support.</p></div>
+          <div class="pillar"><div class="pillar-icon">✓</div><h3>Authentic</h3><p>Regional staples with no blending, no adulterants, and real farm character.</p></div>
+          <div class="pillar"><div class="pillar-icon">♻</div><h3>Sustainable</h3><p>Community-led partnerships that strengthen local food systems.</p></div>
+        </div>
+        <a href="https://wa.me/917077769100?text=Hi%2C%20I%20want%20to%20place%20an%20order%20from%20Mye%20Farm.%20Please%20share%20the%20product%20list." target="_blank" class="btn-wa-big">Message Us on WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DELIVERY -->
+<section id="delivery">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-eyebrow">Shipping Information</p>
+      <h2 class="section-title">We Deliver Across India</h2>
+      <p class="section-sub">From the farms of Odisha to your doorstep — wherever you are in India.</p>
+    </div>
+    <div class="delivery-grid">
+      <div class="delivery-card delivery-item">
+        <span class="delivery-icon">🇮🇳</span>
+        <h3>Pan India Delivery</h3>
+        <p>We ship to all states and union territories across India. Wherever you are, we'll reach you.</p>
+      </div>
+      <div class="delivery-card delivery-item">
+        <span class="delivery-icon">📦</span>
+        <h3>7–12 Working Days</h3>
+        <p>Standard delivery timeframe from order confirmation. We keep you updated on WhatsApp.</p>
+      </div>
+      <div class="delivery-card delivery-item">
+        <span class="delivery-icon">💬</span>
+        <h3>Order via WhatsApp</h3>
+        <p>No app downloads, no accounts. Just message us with what you want and your address.</p>
+      </div>
+      <div class="delivery-card delivery-item">
+        <span class="delivery-icon">🌿</span>
+        <h3>Fresh & Sealed</h3>
+        <p>All products are packed fresh and sealed to preserve quality throughout transit.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-eyebrow">What Customers Say</p>
+      <h2 class="section-title">Real People, Real Results</h2>
+      <p class="section-sub">From families in cities to health-conscious individuals — here's what they think of Mye Farm.</p>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"I ordered the Pimpudibasa rice and was blown away by the aroma when I opened the packet. It tasted completely different from what I get at the supermarket. Will order again."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">P</div>
+          <div>
+            <div class="author-name">Priya Sharma</div>
+            <div class="author-location">Bengaluru</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"The Roasted Horse Gram Dal is incredible — I can smell it cooking from the next room. Packaging was neat, delivery was on time. Great to know the money goes directly to farmers."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">R</div>
+          <div>
+            <div class="author-name">Rahul Mishra</div>
+            <div class="author-location">Hyderabad</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"Ordered via WhatsApp and the process was super simple. The Khichdi Mix is now a staple in our house. Kids love it and I love that it's natural with no additives."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">A</div>
+          <div>
+            <div class="author-name">Anita Patel</div>
+            <div class="author-location">Mumbai</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div>
+        <p class="section-eyebrow">Get in Touch</p>
+        <h2 class="section-title">Contact Us</h2>
+        <p class="section-sub">Have a question about a product, your order, or want to collaborate? We're here.</p>
+        <div class="contact-info">
+          <div class="contact-item"><div class="contact-icon">📍</div><div><strong>Address</strong><span>N2/24, IRC Village, Bhubaneswar (BBSR), Odisha</span></div></div>
+          <div class="contact-item"><div class="contact-icon">💬</div><div><strong>WhatsApp</strong><a href="https://wa.me/917077769100" target="_blank">+91 70777 69100</a></div></div>
+          <div class="contact-item"><div class="contact-icon">✉</div><div><strong>Email</strong><a href="mailto:Support@mye.farm">Support@mye.farm</a></div></div>
+          <div class="contact-item"><div class="contact-icon">👤</div><div><strong>Contact Person</strong><span>Debadatta Senapati — Accounts & Manager</span></div></div>
+          <div class="contact-item"><div class="contact-icon">◎</div><div><strong>Instagram</strong><a href="https://www.instagram.com/mye.farm" target="_blank">@mye.farm</a></div></div>
+        </div>
+      </div>
+      <div class="contact-card">
+        <h3>Send a WhatsApp Enquiry</h3>
+        <p>Share your details and we will open WhatsApp with a ready-to-send message.</p>
+        <div class="form-row">
+          <div class="form-field"><label for="contactName">Name</label><input type="text" id="contactName" placeholder="Your name" /></div>
+          <div class="form-field"><label for="contactEmail">Email</label><input type="email" id="contactEmail" placeholder="you@example.com" /></div>
+        </div>
+        <div class="form-field"><label for="contactMsg">Message</label><textarea id="contactMsg" placeholder="Tell us what you would like to order or ask about"></textarea></div>
+        <button class="contact-submit" id="sendWaBtn" type="button">Send via WhatsApp</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a href="#" class="footer-logo"><img src="images/myefarm-logo.png" alt="Mye Farm Logo"></a>
+        <p class="footer-tagline">Empowering rural farmers through direct digital market access and bringing authentic farm produce to homes across India.</p>
+      </div>
+      <div>
+        <p class="footer-heading">Quick Links</p>
+        <ul class="footer-links">
+          <li><a href="#products">Products</a></li>
+          <li><a href="#why">Why Mye Farm</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#delivery">Delivery</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-heading">Contact</p>
+        <ul class="footer-contact">
+          <li>N2/24, IRC Village, Bhubaneswar, Odisha</li>
+          <li><a href="https://wa.me/917077769100" target="_blank">+91 70777 69100</a></li>
+          <li><a href="mailto:Support@mye.farm">Support@mye.farm</a></li>
+          <li><a href="https://www.instagram.com/mye.farm" target="_blank">@mye.farm</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Mye Farm. All rights reserved.</p>
+      <p><a href="#">Privacy</a> · <a href="#">Terms</a></p>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp Float Button -->
+<a href="https://wa.me/917077769100?text=Hi%2C%20I%20want%20to%20order%20from%20Mye%20Farm" target="_blank" class="wa-float" aria-label="Chat on WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+</a>
+
+  <script src="script.js"></script>
+</body>
+</html>
